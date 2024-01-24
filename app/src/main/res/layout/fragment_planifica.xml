@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentPlanifica">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_margin="40dp">
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Planifica una práctica"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Titulo Tarea"
+            />
+        <EditText
+            android:id="@+id/etTarea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Práctica 1"
+
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            >
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+
+                android:text="Fecha Inicio"/>
+            <EditText
+                android:id="@+id/etFechaInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+
+                android:hint="10/01/2024"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+
+                android:text="Grupo"/>
+
+
+            <Spinner
+                android:id="@+id/spGrupo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="50dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha Fin"
+                    android:layout_marginBottom="20dp"
+                    />
+
+                <EditText
+                    android:id="@+id/etFechaFin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="20/01/2024"
+                    android:layout_marginBottom="20dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="Módulo"/>
+                <Spinner
+                    android:id="@+id/spModulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="30dp"
+
+            android:ems="10"
+            android:gravity="left|top"
+            android:hint="Describe brevemente la práctica..."
+            android:inputType="textMultiLine"
+            android:textSize="15sp">
+            <requestFocus />
+        </EditText>
+        <Button
+            android:id="@+id/btGuardar"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar"/>
+
+
+
+
+
+</LinearLayout>
+
+
+
+
+</FrameLayout>

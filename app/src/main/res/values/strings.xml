@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PruebaSQLLite</string>
+    <string name="nav_open">Hola</string>
+    <string name="nav_close">Adios</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
