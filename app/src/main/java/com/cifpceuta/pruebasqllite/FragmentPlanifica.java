@@ -17,12 +17,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -134,41 +138,67 @@ public class FragmentPlanifica extends Fragment {
         String grupoo = spinnerGrupo.getSelectedItem().toString();
         String moduloo = spinnerModulo.getSelectedItem().toString();
 
-        // Add a new document with a generated id.
-        Map<String, Object> data = new HashMap<>();
-        data.put("user", mAuth.getCurrentUser().getUid().toString());
-        data.put("Tarea", tareaa);
-        data.put("Fecha Inicio", fechaInicioo);
-        data.put("Fecha Fin", fechaFinaaal);
-        data.put("Grupo", grupoo);
-        data.put("Módulo", moduloo);
-        data.put("Descripción", descriptioon);
-
-
-        db.collection("tareas").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                        Toast.makeText(FragmentPlanifica.this.getContext(),"Datos añadidos correctamente",Toast.LENGTH_LONG).show();
-
-                        tarea.setText("");
-                        fechaInicio.setText("");
-                        fechaFinal.setText("");
-                        description.setText("");
-                        spinnerGrupo.setSelection(1);
-                        spinnerModulo.setSelection(1);
+        Practica practica = new Practica(tareaa,fechaInicioo,fechaFinaaal,descriptioon,moduloo);
 
 
 
+
+
+        db.collection("tareas").document(grupoo).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()){
+
+              // Recupera el documento asociado a la tarea.
+                    DocumentSnapshot document = task.getResult();
+
+                    ArrayList<Practica> listaTareas;
+
+                    if (document.exists()){
+
+                        listaTareas = (ArrayList<Practica> )document.get("tareas");
+                        listaTareas.add(practica);
+
+                    }else{
+                        listaTareas = new ArrayList<>();
+                        listaTareas.add(practica);
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure( Exception e) {
 
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
+                    db.collection("tareas").document(grupoo).set(listaTareas).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            if (task.isSuccessful()){
+
+                                Toast.makeText(FragmentPlanifica.this.getContext(),"Datos añadidos correctamente",Toast.LENGTH_LONG).show();
+
+                                tarea.setText("");
+                                fechaInicio.setText("");
+                                fechaFinal.setText("");
+                                description.setText("");
+                                spinnerGrupo.setSelection(1);
+                                spinnerModulo.setSelection(1);
+
+                            }else{
+
+
+
+                            }
+
+                        }
+                    });
+
+                }
+
+            }
+        });
+
+
+
+
+
+
 
     }
 
