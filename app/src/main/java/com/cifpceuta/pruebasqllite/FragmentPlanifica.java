@@ -12,8 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,14 +41,13 @@ public class FragmentPlanifica extends Fragment {
     FirebaseFirestore db;
     Spinner spinnerGrupo, spinnerModulo;
     EditText tarea, fechaInicio, fechaFinal, description;
+    Button enviar;
 
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public FragmentPlanifica() {
         // Required empty public constructor
@@ -78,9 +79,8 @@ public class FragmentPlanifica extends Fragment {
 
 
 
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -95,6 +95,9 @@ public class FragmentPlanifica extends Fragment {
         fechaFinal = rootView.findViewById(R.id.etFechaFin);
         fechaInicio = rootView.findViewById(R.id.etFechaInicio);
         description = rootView.findViewById(R.id.etDescription);
+        enviar = rootView.findViewById(R.id.btGuardar);
+
+
 
         String[] grupos = {"1DAM","2DAM"};
         String[] modulos = {"BD","ED","FOL","LM","PR","SI","AD","DI","EMP","PSP","PMDM","SGE",""};
@@ -104,6 +107,13 @@ public class FragmentPlanifica extends Fragment {
         spinnerGrupo.setAdapter(adaptador);
         spinnerModulo.setAdapter(adaptador2);
 
+        enviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subirDatos();
+            }
+        });
+
 
 
         // Inflate the layout for this fragment
@@ -111,6 +121,11 @@ public class FragmentPlanifica extends Fragment {
     }
 
     public void subirDatos(){
+
+
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         String tareaa = tarea.getText().toString();
         String fechaInicioo = fechaInicio.getText().toString();
@@ -126,29 +141,34 @@ public class FragmentPlanifica extends Fragment {
         data.put("Fecha Inicio", fechaInicioo);
         data.put("Fecha Fin", fechaFinaaal);
         data.put("Grupo", grupoo);
-        data.put("Módulo", grupoo);
+        data.put("Módulo", moduloo);
         data.put("Descripción", descriptioon);
 
 
-
-
-
-        db.collection("cities")
-                .add(data)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("tareas").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                        Toast.makeText(FragmentPlanifica.this.getContext(),"Datos añadidos correctamente",Toast.LENGTH_LONG).show();
+
+                        tarea.setText("");
+                        fechaInicio.setText("");
+                        fechaFinal.setText("");
+                        description.setText("");
+                        spinnerGrupo.setSelection(1);
+                        spinnerModulo.setSelection(1);
+
+
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
+                    public void onFailure( Exception e) {
+
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
-
-
 
     }
 
