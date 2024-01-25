@@ -148,12 +148,15 @@ public class FragmentPlanifica extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
+                Map<String, ArrayList<Practica>> datos = new HashMap<>();
+
                 if (task.isSuccessful()){
 
               // Recupera el documento asociado a la tarea.
                     DocumentSnapshot document = task.getResult();
 
                     ArrayList<Practica> listaTareas;
+
 
                     if (document.exists()){
 
@@ -164,6 +167,8 @@ public class FragmentPlanifica extends Fragment {
                         listaTareas = new ArrayList<>();
                         listaTareas.add(practica);
                     }
+
+                    datos.put("tareas",listaTareas);
 
                     db.collection("tareas").document(grupoo).set(listaTareas).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
