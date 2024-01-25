@@ -22,14 +22,7 @@
             android:layout_weight="1">
 
         </androidx.recyclerview.widget.RecyclerView>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_add_elemento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="12dp"
-            android:tint="#fff"
-            android:src="@drawable/add_24"/>
+
     </LinearLayout>
 
 </FrameLayout>

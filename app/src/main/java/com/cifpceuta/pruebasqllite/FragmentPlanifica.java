@@ -138,7 +138,7 @@ public class FragmentPlanifica extends Fragment {
         String grupoo = spinnerGrupo.getSelectedItem().toString();
         String moduloo = spinnerModulo.getSelectedItem().toString();
 
-        Practica practica = new Practica(tareaa,fechaInicioo,fechaFinaaal,descriptioon,moduloo);
+        Practica practica = new Practica(tareaa,fechaInicioo,fechaFinaaal,descriptioon,moduloo,grupoo);
 
 
 
