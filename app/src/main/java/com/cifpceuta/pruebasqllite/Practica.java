@@ -8,13 +8,16 @@ public class Practica {
     public String descrtiption;
     public String modulo;
 
+    public String grupo;
 
-    public Practica(String tarea, String fechaInicio, String fechaFinal, String descrtiption, String modulo) {
+
+    public Practica(String tarea, String fechaInicio, String fechaFinal, String descrtiption, String modulo, String grupo) {
         this.tarea = tarea;
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.descrtiption = descrtiption;
         this.modulo = modulo;
+        this.grupo = grupo;
     }
 
 
@@ -56,5 +59,13 @@ public class Practica {
 
     public void setModulo(String modulo) {
         this.modulo = modulo;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
     }
 }

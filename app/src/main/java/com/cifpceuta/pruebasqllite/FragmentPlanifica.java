@@ -170,7 +170,7 @@ public class FragmentPlanifica extends Fragment {
 
                     datos.put("tareas",listaTareas);
 
-                    db.collection("tareas").document(grupoo).set(listaTareas).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    db.collection("tareas").document(grupoo).set(datos).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
