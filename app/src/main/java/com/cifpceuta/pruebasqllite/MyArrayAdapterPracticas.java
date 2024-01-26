@@ -57,6 +57,7 @@ import java.util.ArrayList;
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
 
+                cardView= itemView.findViewById(R.id.cardView);
                 grupo = itemView.findViewById(R.id.textViewGrupo);
                 materia = itemView.findViewById(R.id.textViewAsignatura);
                 contenido = itemView.findViewById(R.id.textViewContenido);
