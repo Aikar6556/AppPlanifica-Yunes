@@ -163,6 +163,7 @@ public class FragmentPlanifica extends Fragment {
                         listaTareas = (ArrayList<Practica> )document.get("tareas");
                         listaTareas.add(practica);
 
+
                     }else{
                         listaTareas = new ArrayList<>();
                         listaTareas.add(practica);

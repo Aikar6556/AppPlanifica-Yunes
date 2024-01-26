@@ -20,6 +20,8 @@ public class Practica {
         this.grupo = grupo;
     }
 
+    public Practica() {
+    }
 
     public String getTarea() {
         return tarea;

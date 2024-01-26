@@ -23,6 +23,9 @@ import java.util.ArrayList;
     ArrayList<Practica> practicas;
 
 
+        public MyArrayAdapterPracticas(ArrayList<Practica> practicas) {
+            this.practicas = practicas;
+        }
 
         @NonNull
         @Override

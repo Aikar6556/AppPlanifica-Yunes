@@ -117,11 +117,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             InicioCuenta inicioCuenta = InicioCuenta.newInstance(nombre,correo,turno,grupo);
 
 
-
-
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragPerfilEst, inicioCuenta)
                     .commit();
+
         } else if (itemId == R.id.nav_logout) {
             Toast.makeText(HomeActivity.this, "Entra en salir", Toast.LENGTH_SHORT).show();
 
@@ -136,7 +135,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
 
 
-        } else if (itemId == R.id.plan_exam) {
+
+        } else if (itemId == R.id.ver_practicas_disponibles) {
+
+            FragmentConsultaTareas fragmentConsultaTareas = FragmentConsultaTareas.newInstance();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragPerfilEst, fragmentConsultaTareas)
+                    .commit();
+
+
+
+
+
+    } else if (itemId == R.id.plan_exam) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragPerfilEst, new DefaultFragment())
                     .commit();
