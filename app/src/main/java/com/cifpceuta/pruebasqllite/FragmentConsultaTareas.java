@@ -114,10 +114,10 @@ public class FragmentConsultaTareas extends Fragment {
                 for (int i=0;i<p.size();i++){
                     System.out.println(p.get(i));
                     newPracticas.setTarea(p.get(i).get("tarea").toString());
-                    newPracticas.setTarea(p.get(i).get("modulo").toString());
-                    newPracticas.setTarea(p.get(i).get("fechaInicio").toString());
-                    newPracticas.setTarea(p.get(i).get("fechaFinal").toString());
-                    newPracticas.setTarea(p.get(i).get("descrtiption").toString());
+                    newPracticas.setModulo(p.get(i).get("modulo").toString());
+                    newPracticas.setFechaInicio(p.get(i).get("fechaInicio").toString());
+                    newPracticas.setFechaFinal(p.get(i).get("fechaFinal").toString());
+                    newPracticas.setDescrtiption(p.get(i).get("descrtiption").toString());
                     practicasToAdd.add(newPracticas);
 
                 }
