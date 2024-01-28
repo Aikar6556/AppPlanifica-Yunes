@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,7 +94,6 @@ public class FragmentConsultaTareas extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.fragment_consulta_tareas, container, false);
 
@@ -103,32 +103,28 @@ public class FragmentConsultaTareas extends Fragment {
         db.collection("tareas").document("1DAM").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                DocumentSnapshot cs =task.getResult();
+                DocumentSnapshot cs = null;
 
-                ArrayList<HashMap<String, Object>> p = (ArrayList<HashMap<String, Object>>) cs.get("tareas");
-              //  System.out.println(p.get(0).get("modulo"));
 
-                Practica newPracticas = new Practica();
-                ArrayList<Practica> practicasToAdd = new ArrayList<>();
+                if (task.isSuccessful()){
+                    System.out.printf("Tareas recibidas");
+                    cs = task.getResult();
+                    if (cs.exists()){
+                        System.out.printf("tareas recibidas");
 
-                for (int i=0;i<p.size();i++){
-                    System.out.println(p.get(i));
-                    newPracticas.setTarea(p.get(i).get("tarea").toString());
-                    newPracticas.setModulo(p.get(i).get("modulo").toString());
-                    newPracticas.setFechaInicio(p.get(i).get("fechaInicio").toString());
-                    newPracticas.setFechaFinal(p.get(i).get("fechaFinal").toString());
-                    newPracticas.setDescrtiption(p.get(i).get("descrtiption").toString());
-                    practicasToAdd.add(newPracticas);
-
+                    }else{
+                        System.out.printf("Documento no encontrado");
+                    }
+                }else{
+                    Log.d("PeticiónTareas","Error "+task.getException());
                 }
 
-                for (int i=0;i<practicasToAdd.size();i++){
 
-                    System.out.println(practicasToAdd.get(i));
-                }
+
+                ArrayList<Practica> practicas = (ArrayList<Practica>) cs.get("tareas");
                 recyclerView = rootView.findViewById(R.id.rv_elementos);
 
-                myArrayAdapterPracticas = new MyArrayAdapterPracticas(practicasToAdd);
+                myArrayAdapterPracticas = new MyArrayAdapterPracticas(practicas);
                 recyclerView.setAdapter(myArrayAdapterPracticas);
                 recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 

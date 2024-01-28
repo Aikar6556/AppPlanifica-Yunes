@@ -1,5 +1,7 @@
 package com.cifpceuta.pruebasqllite;
 
+import java.util.Map;
+
 public class Practica {
 
     public String tarea;
@@ -18,6 +20,18 @@ public class Practica {
         this.descrtiption = descrtiption;
         this.modulo = modulo;
         this.grupo = grupo;
+    }
+
+    public Practica(Map<String,Object> mapa){
+
+        this.tarea = mapa.get("tarea").toString();
+        this.fechaInicio = mapa.get("fechaInicio").toString();
+        this.fechaFinal = mapa.get("fechaFinal").toString();
+        this.descrtiption = mapa.get("descrtiption").toString();
+        this.modulo = mapa.get("modulo").toString();
+        this.grupo = mapa.get("grupo").toString();
+
+
     }
 
     public Practica() {

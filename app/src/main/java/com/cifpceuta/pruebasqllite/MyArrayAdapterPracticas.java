@@ -2,6 +2,8 @@ package com.cifpceuta.pruebasqllite;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +17,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
-    public class MyArrayAdapterPracticas extends RecyclerView.Adapter<MyArrayAdapterPracticas.ViewHolder> {
+public class MyArrayAdapterPracticas extends RecyclerView.Adapter<MyArrayAdapterPracticas.ViewHolder> {
 
 
     ArrayList<Practica> practicas;
@@ -36,9 +47,53 @@ import java.util.ArrayList;
 
         @Override
         public void onBindViewHolder(@NonNull MyArrayAdapterPracticas.ViewHolder holder, int position) {
-            holder.bindData(practicas.get(position));
+            holder.bindData(new Practica((Map<String,Object>) practicas.get(position)));
+
+            String fecha = holder.fechafinal.getText().toString();
+
+            String formatoFecha = "dd/MM/yyyy";
+
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(formatoFecha);
+
+            LocalDate localDate = LocalDate.parse(fecha,dateTimeFormatter);
+
+            System.out.printf(String.valueOf(localDate));
+
+
+            LocalDate fechaActual = LocalDate.now();
+
+            int diasRestantes = (int) ChronoUnit.DAYS.between(fechaActual,localDate);
+
+            Log.d("Días restantes", String.valueOf(diasRestantes));
+
+            int color;
+
+
+            // Comparar las fechas
+            if (diasRestantes <=3) {
+                color = Color.parseColor("#FFCDD2");
+                holder.cardView.setCardBackgroundColor(color);
+
+
+            } else if (diasRestantes >=5 && diasRestantes <=7) {
+                color = Color.parseColor("#FFC107");
+                holder.cardView.setCardBackgroundColor(color);
+
+
+            } else {
+                color = Color.parseColor("#4CAF50");
+
+                holder.cardView.setCardBackgroundColor(color);
+
+
+
+            }
+
+
 
         }
+
+
 
         @Override
         public int getItemCount() {
@@ -72,6 +127,8 @@ import java.util.ArrayList;
                 contenido.setText(practica.getDescrtiption());
                 fechainicio.setText(practica.getFechaInicio());
                 fechafinal.setText(practica.getFechaFinal());
+
+               // cardView.setCardBackgroundColor(Color.GREEN);
 
             }
 

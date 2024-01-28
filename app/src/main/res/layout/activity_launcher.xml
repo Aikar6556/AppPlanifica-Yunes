@@ -6,78 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".Launcher">
 
-    <TextView
-        android:id="@+id/tvCorreo"
 
-        android:layout_width="79dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="236dp"
-        android:text="Correo"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="115dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="100dp"
-        android:text="Password"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/send"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCorreo"
-        app:layout_constraintVertical_bias="0.744" />
-
-    <Button
-        android:id="@+id/send"
-        android:layout_width="142dp"
-        android:layout_height="73dp"
-        android:layout_marginBottom="220dp"
-        android:text="Enviar"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        >
 
-    <EditText
-        android:id="@+id/etMail"
-        android:text="deni@defin.es"
-        android:layout_width="183dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="236dp"
-        android:layout_marginEnd="64dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="30dp"
 
-    <EditText
-        android:id="@+id/etPassw"
-        android:layout_width="180dp"
-        android:layout_height="51dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="112dp"
-        android:ems="10"
-        android:text="123456"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/send"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-        app:layout_constraintVertical_bias="0.225" />
+            >
+
+        <TextView
+            android:id="@+id/tvCorreo"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correo"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginEnd="20dp"
+           />
+
+        <EditText
+            android:id="@+id/etMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="deni@defin.es" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="30dp"
+            >
+
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginEnd="20dp"
+           />
+
+
+            <EditText
+                android:id="@+id/etPassw"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+
+                android:inputType="textPassword"
+                android:text="123456" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="70dp"
+            android:text="Enviar" />
+
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/home"
-        android:layout_width="82dp"
-        android:layout_height="57dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/baseline_360_24"
+        android:background="@drawable/baseline_home_24"
         android:onClick="home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
