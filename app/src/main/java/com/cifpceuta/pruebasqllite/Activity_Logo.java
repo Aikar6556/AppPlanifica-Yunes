@@ -16,7 +16,7 @@ public class Activity_Logo extends AppCompatActivity {
             @Override
             public void run() {
 
-                startActivity(new Intent(Activity_Logo.this,Launcher.class));
+                startActivity(new Intent(Activity_Logo.this,MainActivity.class));
                 finish();
 
             }
