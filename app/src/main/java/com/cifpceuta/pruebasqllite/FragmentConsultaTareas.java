@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -54,10 +55,26 @@ public class FragmentConsultaTareas extends Fragment {
     RecyclerView recyclerView;
     MyArrayAdapterPracticas myArrayAdapterPracticas;
 
-    ArrayList<Practica> listaPracticas;
 
-    FirebaseFirestore db;
-    FirebaseAuth mAuth;
+    FirebaseFirestore db =  FirebaseFirestore.getInstance();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    String grupo;
+
+
+
+
+//    public void getGrupoUsuario(){
+//
+//
+//
+//
+//        Log.d("valor del id","id: "+id);
+//
+//        Log.d("valor del grupo","Grupo: "+grupo);
+//
+//
+//
+//    }
 
 
 
@@ -97,41 +114,75 @@ public class FragmentConsultaTareas extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_consulta_tareas, container, false);
 
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-
-        db.collection("tareas").document("1DAM").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        String id = mAuth.getCurrentUser().getUid();
+        Log.w("IdUser","Id: "+id);
+        db.collection("Estudiantes").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                DocumentSnapshot cs = null;
-
-
                 if (task.isSuccessful()){
-                    System.out.printf("Tareas recibidas");
-                    cs = task.getResult();
-                    if (cs.exists()){
-                        System.out.printf("tareas recibidas");
+                    Log.w("Grupo","Entra");
 
-                    }else{
-                        System.out.printf("Documento no encontrado");
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if (documentSnapshot.exists()){
+                        grupo = documentSnapshot.getData().get("grupo").toString();
+                        Log.w("GrupoDespues","Grupo: "+grupo);
+
+                        db.collection("tareas").document(grupo).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                DocumentSnapshot cs = null;
+
+
+                                if (task.isSuccessful()){
+                                    Log.d("Estado tarea","tarea completada");
+                                    cs = task.getResult();
+                                    if (cs.exists()){
+                                        Log.d("Estado tarea","Documento encontrado");
+                                    }else{
+                                        Log.d("Estado tarea","Documento no encontrado");                    }
+                                }else{
+                                    Log.d("PeticiónTareas","Error "+task.getException());
+                                }
+
+
+
+                                ArrayList<Practica> practicas = (ArrayList<Practica>) cs.get("tareas");
+                                recyclerView = rootView.findViewById(R.id.rv_elementos);
+
+                                myArrayAdapterPracticas = new MyArrayAdapterPracticas(practicas);
+                                recyclerView.setAdapter(myArrayAdapterPracticas);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+
+
+
+                            }
+                        });
+
+
+
+                    }else {
+                        Log.w("Grupo","No Entra");
+                        Log.w("Documento vacío","Documento no enocontrado ");
+
                     }
                 }else{
-                    Log.d("PeticiónTareas","Error "+task.getException());
+                    Log.w("Grupo","NoEntra");
+                    Log.w("Error, no es succesful","Error: "+task.getException());
+
                 }
-
-
-
-                ArrayList<Practica> practicas = (ArrayList<Practica>) cs.get("tareas");
-                recyclerView = rootView.findViewById(R.id.rv_elementos);
-
-                myArrayAdapterPracticas = new MyArrayAdapterPracticas(practicas);
-                recyclerView.setAdapter(myArrayAdapterPracticas);
-                recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
-
-
-
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("AAA","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: "+e.getMessage());
             }
         });
+
+
+
+
+        Log.w("Grupo","Grupo: "+grupo);
+
 
 
 
