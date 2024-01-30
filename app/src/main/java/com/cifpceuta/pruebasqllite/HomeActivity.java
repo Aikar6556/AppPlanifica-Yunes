@@ -153,6 +153,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
 
 
+        } else if (itemId == R.id.semanal) {
+            Fragment_Semanal fragmentSemanal = new Fragment_Semanal();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragPerfilEst, fragmentSemanal)
+                        .commit();
+
+
+
+
+
         } else if (itemId == R.id.nav_settings) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragPerfilEst, new DefaultFragment())
