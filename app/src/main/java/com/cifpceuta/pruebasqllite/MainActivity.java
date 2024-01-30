@@ -11,7 +11,6 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     SQLiteDatabase database;
-    MyDbHelper manejador;
 
     Button iniciarSesion, registrar;
 

@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -118,6 +119,26 @@ public class Fragment_Semanal extends Fragment {
 
                                 ArrayList<Practica> practicas = (ArrayList<Practica>) cs.get("tareas");
 
+                                tableLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                                    @Override
+                                    public void onTabSelected(TabLayout.Tab tab) {
+
+                                    }
+
+                                    @Override
+                                    public void onTabUnselected(TabLayout.Tab tab) {
+
+                                    }
+
+                                    @Override
+                                    public void onTabReselected(TabLayout.Tab tab) {
+
+                                    }
+                                });
+
+
+
+
 
                                 recyclerView = rootView.findViewById(R.id.rv_semanal);
 
@@ -160,4 +181,7 @@ public class Fragment_Semanal extends Fragment {
 
         return rootView;
     }
+
+
+
 }

@@ -45,6 +45,19 @@ public class MyArrayAdapterPracticas extends RecyclerView.Adapter<MyArrayAdapter
             return new MyArrayAdapterPracticas.ViewHolder(view);
         }
 
+        private static int obtenerSemanaDelMes(LocalDate fecha) {
+        int diaDelMes = fecha.getDayOfMonth();
+        int diaDeLaSemana = fecha.getDayOfWeek().getValue();
+
+        int semanaDelMes = (diaDelMes - 1) / 7 + 1;
+
+        if (diaDelMes <= 7 && diaDeLaSemana > diaDelMes) {
+            semanaDelMes++;
+        }
+
+        return semanaDelMes;
+    }
+
         @Override
         public void onBindViewHolder(@NonNull MyArrayAdapterPracticas.ViewHolder holder, int position) {
             holder.bindData(new Practica((Map<String,Object>) practicas.get(position)));
@@ -56,6 +69,10 @@ public class MyArrayAdapterPracticas extends RecyclerView.Adapter<MyArrayAdapter
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(formatoFecha);
 
             LocalDate localDate = LocalDate.parse(fecha,dateTimeFormatter);
+
+            Log.d("Semana num",""+obtenerSemanaDelMes(localDate));
+
+
 
             System.out.printf(String.valueOf(localDate));
 
@@ -92,6 +109,8 @@ public class MyArrayAdapterPracticas extends RecyclerView.Adapter<MyArrayAdapter
 
 
         }
+
+
 
 
 
@@ -133,7 +152,13 @@ public class MyArrayAdapterPracticas extends RecyclerView.Adapter<MyArrayAdapter
             }
 
 
+
+
+
+
+
         }
+
 
 
 

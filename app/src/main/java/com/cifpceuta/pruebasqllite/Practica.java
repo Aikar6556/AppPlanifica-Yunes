@@ -13,6 +13,8 @@ public class Practica {
     public String grupo;
 
 
+
+
     public Practica(String tarea, String fechaInicio, String fechaFinal, String descrtiption, String modulo, String grupo) {
         this.tarea = tarea;
         this.fechaInicio = fechaInicio;
