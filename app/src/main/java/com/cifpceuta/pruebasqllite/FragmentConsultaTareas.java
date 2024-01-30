@@ -60,28 +60,6 @@ public class FragmentConsultaTareas extends Fragment {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String grupo;
 
-
-
-
-//    public void getGrupoUsuario(){
-//
-//
-//
-//
-//        Log.d("valor del id","id: "+id);
-//
-//        Log.d("valor del grupo","Grupo: "+grupo);
-//
-//
-//
-//    }
-
-
-
-
-
-
-
     public FragmentConsultaTareas() {
         // Required empty public constructor
     }

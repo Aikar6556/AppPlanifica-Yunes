@@ -8,6 +8,10 @@
         android:title="Mi cuenta" />
 
     <item
+        android:id="@+id/semanal"
+        android:title="Semanal" />
+
+    <item
         android:id="@+id/plan_practica"
         android:title="Planificar práctica" />
 
