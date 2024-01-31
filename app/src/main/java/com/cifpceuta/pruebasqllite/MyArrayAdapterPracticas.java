@@ -131,6 +131,11 @@ public class MyArrayAdapterPracticas extends RecyclerView.Adapter<MyArrayAdapter
             return practicas.size();
         }
 
+    public void setFilterList(ArrayList<Practica> lista){
+        practicas = lista;
+        notifyDataSetChanged();
+    }
+
 
 
 

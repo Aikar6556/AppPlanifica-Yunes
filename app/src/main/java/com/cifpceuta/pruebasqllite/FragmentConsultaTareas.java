@@ -55,6 +55,8 @@ public class FragmentConsultaTareas extends Fragment {
     RecyclerView recyclerView;
     MyArrayAdapterPracticas myArrayAdapterPracticas;
 
+    SearchView searchView;
+
 
     FirebaseFirestore db =  FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -85,6 +87,8 @@ public class FragmentConsultaTareas extends Fragment {
         if (getArguments() != null) {
         }
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -161,6 +165,24 @@ public class FragmentConsultaTareas extends Fragment {
 
         Log.w("Grupo","Grupo: "+grupo);
 
+        searchView = rootView.findViewById(R.id.svBusqueda);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                filtrado(newText,myArrayAdapterPracticas);
+
+
+                return false;
+            }
+        });
+
 
 
 
@@ -171,4 +193,36 @@ public class FragmentConsultaTareas extends Fragment {
 
         return rootView;
     }
+
+
+    private void filtrado(String texto, MyArrayAdapterPracticas myArrayAdapterPracticas){
+        ArrayList<Practica> filteredList_items = new ArrayList<>();
+
+        Practica p;
+        ArrayList<Practica> practicas = new ArrayList<>();
+
+        for (int i=0;i<myArrayAdapterPracticas.practicas.size();i++) {
+            try {
+
+                p = myArrayAdapterPracticas.practicas.get(i);
+
+
+            } catch (ClassCastException castException) {
+
+                p = new Practica((Map<String, Object>) myArrayAdapterPracticas.practicas.get(i));
+
+            }
+
+            practicas.add(p);
+
+        }
+        for(Practica item : practicas){
+            if(item.getDescrtiption().toLowerCase().contains(texto.toLowerCase())){
+                filteredList_items.add(item);
+            }
+        }
+        myArrayAdapterPracticas.setFilterList(filteredList_items);
+    }
+
+
 }
