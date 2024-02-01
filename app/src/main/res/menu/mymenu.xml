@@ -28,6 +28,10 @@
         android:title="Preferencias" />
 
     <item
+        android:id="@+id/nav_salidas"
+        android:title="Salidas" />
+
+    <item
         android:id="@+id/nav_logout"
         android:title="Salir" />
 

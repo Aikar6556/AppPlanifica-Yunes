@@ -47,7 +47,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar = findViewById(R.id.toolbar);
 
 
-
         drawerLayout = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
@@ -60,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (i != null) {
 
             correoUsuario = i.getStringExtra("correo");
-            mensaje.setText("Bienvenido! "+correoUsuario);
+            mensaje.setText("Bienvenido! " + correoUsuario);
 
 
         }
@@ -76,9 +75,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    if (document.exists()){
+                    if (document.exists()) {
 
                         correo = (String) document.get("correo");
                         nombre = (String) document.get("nombre");
@@ -114,7 +113,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if (itemId == R.id.nav_account) {
 
-            InicioCuenta inicioCuenta = InicioCuenta.newInstance(nombre,correo,turno,grupo);
+            InicioCuenta inicioCuenta = InicioCuenta.newInstance(nombre, correo, turno, grupo);
 
 
             getSupportFragmentManager().beginTransaction()
@@ -128,12 +127,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (itemId == R.id.plan_practica) {
 
-            FragmentPlanifica fragmentPlanifica = FragmentPlanifica.newInstance("hola","adios");
+            FragmentPlanifica fragmentPlanifica = FragmentPlanifica.newInstance("hola", "adios");
 
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragPerfilEst, fragmentPlanifica)
                     .commit();
-
 
 
         } else if (itemId == R.id.ver_practicas_disponibles) {
@@ -144,10 +142,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
 
 
-
-
-
-    } else if (itemId == R.id.plan_exam) {
+        } else if (itemId == R.id.plan_exam) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragPerfilEst, new DefaultFragment())
                     .commit();
@@ -155,10 +150,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (itemId == R.id.semanal) {
             Fragment_Semanal fragmentSemanal = new Fragment_Semanal();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragPerfilEst, fragmentSemanal)
-                        .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragPerfilEst, fragmentSemanal)
+                    .commit();
 
+        } else if (itemId == R.id.nav_salidas) {
+           Fragment_Dialog fragmentDialog = new Fragment_Dialog();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragPerfilEst, fragmentDialog)
+                    .commit();
 
 
 
