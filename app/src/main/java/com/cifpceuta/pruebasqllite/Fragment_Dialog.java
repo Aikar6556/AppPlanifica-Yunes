@@ -105,64 +105,36 @@ public class Fragment_Dialog extends Fragment {
         Log.w("IdUser", "Id: " + id);
 
 
-        db.collection("actextra").document().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-
-                if (task.isSuccessful()) {
-                    Log.w("Grupo", "Entra");
-
-                    DocumentSnapshot documentSnapshot = task.getResult();
-
-
-                    if (documentSnapshot.exists()) {
-
-
-
-
-
-                    }
-
-
-
-                }
-
-
-
-            }
-        });
-
         db.collection("actextra").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
 
-                    Log.w("Exito", "Task Succesful: " + id);
+
+                if (task.isSuccessful()) {
 
                     DocumentSnapshot documentSnapshot = task.getResult();
 
+
                     if (documentSnapshot.exists()) {
 
-                        Log.w("Exito2", "Document Exists: " + id);
-
-                        grupo = documentSnapshot.getData().get("grupo").toString();
-
-
-                    } else {
-
-                        Log.w("Fail2", "Document NO exists: " + id);
+                        ArrayList<Viaje> viajes = (ArrayList<Viaje>) documentSnapshot.get("actextra");
 
                     }
 
 
-                } else {
+                ArrayList<Viaje> viajesFinal = new ArrayList<>();
 
-                    Log.w("Fail", "Task Not succesfully: " + id);
+
+
 
                 }
+
+
+
             }
         });
+
+
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
