@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class Fragment_Semanal extends Fragment {
@@ -120,16 +121,50 @@ public class Fragment_Semanal extends Fragment {
                                 ArrayList<Practica> practicas = (ArrayList<Practica>) cs.get("tareas");
 
 
-                                for (int i=0;i<practicas.size();i++){
 
-                                    System.out.printf(practicas.get(i).getFechaFinal().toString());
-                                    //Log.d("Fecha final",dato);
-
-                                }
 
                                 tableLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+
+
                                     @Override
                                     public void onTabSelected(TabLayout.Tab tab) {
+
+                                        ArrayList<Practica> practicasFiltradas = new ArrayList<>();
+
+                                        Practica p;
+
+
+                                        for (int i = 0; i < practicas.size(); i++) {
+
+                                            try {
+
+                                                p = practicas.get(i);
+
+
+                                            } catch (ClassCastException error) {
+
+
+                                                p = new Practica((Map<String, Object>) practicas.get(i));
+
+                                            }
+
+                                            int num = MyArrayAdapterPracticas.obtenerSemanaDelMes(p.fechaParseada());
+
+                                            if ((tab.getPosition() + 1) == num) {
+
+                                                practicasFiltradas.add(p);
+
+                                            }
+                                        }
+
+                                        recyclerView = rootView.findViewById(R.id.rv_semanal);
+//
+                                        myArrayAdapterPracticas = new MyArrayAdapterPracticas(practicasFiltradas);
+                                        recyclerView.setAdapter(myArrayAdapterPracticas);
+                                        recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+
+
 
                                     }
 
@@ -144,19 +179,41 @@ public class Fragment_Semanal extends Fragment {
                                     }
                                 });
 
+                                ArrayList<Practica> resultado2 = new ArrayList<>();
 
 
+                                for (int i=0;i<practicas.size();i++){
 
+                                    Practica p;
+
+                                    try {
+
+                                        p = practicas.get(i);
+
+
+                                    } catch (ClassCastException error) {
+
+
+                                        p = new Practica((Map<String, Object>) practicas.get(i));
+
+                                    }
+
+
+                                    int numeroSemana = MyArrayAdapterPracticas.obtenerSemanaDelMes(p.fechaParseada());
+
+                                    if (numeroSemana == 1){
+
+                                        resultado2.add(p);
+
+                                    }
+
+
+                                }
 
                                 recyclerView = rootView.findViewById(R.id.rv_semanal);
-
-                                myArrayAdapterPracticas = new MyArrayAdapterPracticas(practicas);
+                                myArrayAdapterPracticas = new MyArrayAdapterPracticas(resultado2);
                                 recyclerView.setAdapter(myArrayAdapterPracticas);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
-
-
-
-
 
                             }
                         });
@@ -191,23 +248,6 @@ public class Fragment_Semanal extends Fragment {
 
         return rootView;
     }
-
-    private static int obtenerSemanaDelMes(LocalDate fecha) {
-
-
-
-        int diaDelMes = fecha.getDayOfMonth();
-        int diaDeLaSemana = fecha.getDayOfWeek().getValue();
-
-        int semanaDelMes = (diaDelMes - 1) / 7 + 1;
-
-        if (diaDelMes <= 7 && diaDeLaSemana > diaDelMes) {
-            semanaDelMes++;
-        }
-
-        return semanaDelMes;
-    }
-
 
 
 

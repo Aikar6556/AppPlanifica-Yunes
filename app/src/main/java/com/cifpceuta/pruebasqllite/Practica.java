@@ -1,5 +1,7 @@
 package com.cifpceuta.pruebasqllite;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 public class Practica {
@@ -32,6 +34,22 @@ public class Practica {
         this.descrtiption = mapa.get("descrtiption").toString();
         this.modulo = mapa.get("modulo").toString();
         this.grupo = mapa.get("grupo").toString();
+
+
+    }
+
+    public LocalDate fechaParseada (){
+
+
+        String fecha = this.fechaFinal;
+
+        String formatoFecha = "dd/MM/yyyy";
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(formatoFecha);
+
+        LocalDate localDate = LocalDate.parse(fecha,dateTimeFormatter);
+
+        return localDate;
 
 
     }

@@ -45,7 +45,7 @@ public class MyArrayAdapterPracticas extends RecyclerView.Adapter<MyArrayAdapter
             return new MyArrayAdapterPracticas.ViewHolder(view);
         }
 
-        private static int obtenerSemanaDelMes(LocalDate fecha) {
+        public static int obtenerSemanaDelMes(LocalDate fecha) {
         int diaDelMes = fecha.getDayOfMonth();
         int diaDeLaSemana = fecha.getDayOfWeek().getValue();
 
@@ -60,7 +60,19 @@ public class MyArrayAdapterPracticas extends RecyclerView.Adapter<MyArrayAdapter
 
         @Override
         public void onBindViewHolder(@NonNull MyArrayAdapterPracticas.ViewHolder holder, int position) {
-            holder.bindData(new Practica((Map<String,Object>) practicas.get(position)));
+
+
+          try{
+
+              holder.bindData(practicas.get(position));
+
+
+          }catch (ClassCastException castException){
+
+              holder.bindData(new Practica((Map<String,Object>) practicas.get(position)));
+
+
+          }
 
             String fecha = holder.fechafinal.getText().toString();
 
@@ -118,6 +130,11 @@ public class MyArrayAdapterPracticas extends RecyclerView.Adapter<MyArrayAdapter
         public int getItemCount() {
             return practicas.size();
         }
+
+    public void setFilterList(ArrayList<Practica> lista){
+        practicas = lista;
+        notifyDataSetChanged();
+    }
 
 
 
