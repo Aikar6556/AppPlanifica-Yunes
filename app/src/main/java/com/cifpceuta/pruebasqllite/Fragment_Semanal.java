@@ -119,6 +119,14 @@ public class Fragment_Semanal extends Fragment {
 
                                 ArrayList<Practica> practicas = (ArrayList<Practica>) cs.get("tareas");
 
+
+                                for (int i=0;i<practicas.size();i++){
+
+                                    System.out.printf(practicas.get(i).getFechaFinal().toString());
+                                    //Log.d("Fecha final",dato);
+
+                                }
+
                                 tableLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                                     @Override
                                     public void onTabSelected(TabLayout.Tab tab) {
@@ -145,6 +153,8 @@ public class Fragment_Semanal extends Fragment {
                                 myArrayAdapterPracticas = new MyArrayAdapterPracticas(practicas);
                                 recyclerView.setAdapter(myArrayAdapterPracticas);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+
+
 
 
 
@@ -181,6 +191,23 @@ public class Fragment_Semanal extends Fragment {
 
         return rootView;
     }
+
+    private static int obtenerSemanaDelMes(LocalDate fecha) {
+
+
+
+        int diaDelMes = fecha.getDayOfMonth();
+        int diaDeLaSemana = fecha.getDayOfWeek().getValue();
+
+        int semanaDelMes = (diaDelMes - 1) / 7 + 1;
+
+        if (diaDelMes <= 7 && diaDeLaSemana > diaDelMes) {
+            semanaDelMes++;
+        }
+
+        return semanaDelMes;
+    }
+
 
 
 
