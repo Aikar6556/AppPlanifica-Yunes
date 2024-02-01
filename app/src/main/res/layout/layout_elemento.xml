@@ -8,24 +8,51 @@
     android:elevation="5dp"
     app:contentPadding="10dp"
     android:layout_margin="10dp"
+    app:cardBackgroundColor="@color/verde"
     >
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tv_nombre_elemento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="26sp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:text="Item 1"/>
-        <Button
-            android:id="@+id/btn_borrar_elemento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Borrar"/>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+            <TextView
+                android:id="@+id/textViewGrupo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grupo A"
+                android:textSize="18sp"
+
+                android:textStyle="bold" />
+
+
+
+            <TextView
+                android:id="@+id/textViewContenido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:text="Contenidoooooooo"
+                android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/textViewFechaInicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01/01/2024"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>
