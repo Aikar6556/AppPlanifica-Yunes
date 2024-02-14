@@ -22,7 +22,7 @@ public class MyArrayAdapterViajes extends RecyclerView.Adapter<MyArrayAdapterVia
     }
 
 
-    @NonNull
+
     @Override
     public MyArrayAdapterViajes.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
@@ -35,10 +35,10 @@ public class MyArrayAdapterViajes extends RecyclerView.Adapter<MyArrayAdapterVia
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        holder.binddata(viajes.get(position));
+
+
     }
-
-
-
 
     @Override
     public int getItemCount() {

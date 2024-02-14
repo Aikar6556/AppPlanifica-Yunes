@@ -58,6 +58,9 @@ public class Fragment_Dialog extends Fragment {
 
     Button btnDialogAñadir;
 
+    ArrayList<Viaje> viajes = new ArrayList<>();
+
+
 
     public Fragment_Dialog() {
         // Required empty public constructor
@@ -100,40 +103,11 @@ public class Fragment_Dialog extends Fragment {
 
         fabAdd = rootView.findViewById(R.id.fabAñadir);
 
+        recyclerView = rootView.findViewById(R.id.rv_salidas);
+
 
         String id = mAuth.getCurrentUser().getUid();
         Log.w("IdUser", "Id: " + id);
-
-
-        db.collection("actextra").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-
-                if (task.isSuccessful()) {
-
-                    DocumentSnapshot documentSnapshot = task.getResult();
-
-
-                    if (documentSnapshot.exists()) {
-
-                        ArrayList<Viaje> viajes = (ArrayList<Viaje>) documentSnapshot.get("actextra");
-
-                    }
-
-
-                ArrayList<Viaje> viajesFinal = new ArrayList<>();
-
-
-
-
-                }
-
-
-
-            }
-        });
-
 
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +135,7 @@ public class Fragment_Dialog extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        subirDatos();
+                        subirDatos(rootView);
 
 
                         dialog.dismiss();
@@ -179,7 +153,7 @@ public class Fragment_Dialog extends Fragment {
         return rootView;
     }
 
-    public void subirDatos() {
+    public void subirDatos(View rootView) {
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -190,6 +164,15 @@ public class Fragment_Dialog extends Fragment {
         String grupoo = spinnerGrupo.getSelectedItem().toString();
 
         Viaje viaje = new Viaje(tituloo, grupoo, fechaa);
+
+
+        viajes.add(viaje);
+
+        Log.d("viajes:",viajes.toString());
+
+        myArrayAdapterViajes = new MyArrayAdapterViajes(viajes);
+        recyclerView.setAdapter(myArrayAdapterViajes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 
 
         String id = mAuth.getCurrentUser().getUid();

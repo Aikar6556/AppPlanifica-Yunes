@@ -48,4 +48,13 @@ public class Viaje  {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+    @Override
+    public String toString() {
+        return "Viaje{" +
+                "nombreViaje='" + nombreViaje + '\'' +
+                ", grupo='" + grupo + '\'' +
+                ", fecha='" + fecha + '\'' +
+                '}';
+    }
 }
