@@ -42,7 +42,7 @@ public class MyArrayAdapterViajes extends RecyclerView.Adapter<MyArrayAdapterVia
 
     @Override
     public int getItemCount() {
-        return 0;
+        return viajes.size();
     }
 
 
