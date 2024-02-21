@@ -150,6 +150,12 @@ public class Fragment_Dialog extends Fragment {
         });
 
 
+        myArrayAdapterViajes = new MyArrayAdapterViajes(viajes);
+        recyclerView.setAdapter(myArrayAdapterViajes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+        myArrayAdapterViajes.notifyDataSetChanged();
+
+
         return rootView;
     }
 
@@ -170,9 +176,8 @@ public class Fragment_Dialog extends Fragment {
 
         Log.d("viajes:",viajes.toString());
 
-        myArrayAdapterViajes = new MyArrayAdapterViajes(viajes);
-        recyclerView.setAdapter(myArrayAdapterViajes);
-        recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+
+
 
 
         String id = mAuth.getCurrentUser().getUid();
