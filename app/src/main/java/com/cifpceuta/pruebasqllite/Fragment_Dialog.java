@@ -66,15 +66,7 @@ public class Fragment_Dialog extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_Dialog.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static Fragment_Dialog newInstance(String param1, String param2) {
         Fragment_Dialog fragment = new Fragment_Dialog();
         Bundle args = new Bundle();
@@ -108,6 +100,13 @@ public class Fragment_Dialog extends Fragment {
 
         String id = mAuth.getCurrentUser().getUid();
         Log.w("IdUser", "Id: " + id);
+
+        myArrayAdapterViajes = new MyArrayAdapterViajes(viajes);
+        recyclerView.setAdapter(myArrayAdapterViajes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+        int num = myArrayAdapterViajes.getItemCount();
+
+        Log.w("número de elementos", "num: " + num);
 
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
@@ -150,10 +149,6 @@ public class Fragment_Dialog extends Fragment {
         });
 
 
-        myArrayAdapterViajes = new MyArrayAdapterViajes(viajes);
-        recyclerView.setAdapter(myArrayAdapterViajes);
-        recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
-        myArrayAdapterViajes.notifyDataSetChanged();
 
 
         return rootView;
@@ -173,9 +168,9 @@ public class Fragment_Dialog extends Fragment {
 
 
         viajes.add(viaje);
+        myArrayAdapterViajes.notifyDataSetChanged();
 
         Log.d("viajes:",viajes.toString());
-
 
 
 
