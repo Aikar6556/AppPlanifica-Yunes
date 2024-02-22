@@ -160,6 +160,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.fragPerfilEst, fragmentDialog)
                     .commit();
 
+        } else if (itemId == R.id.nav_alumnos) {
+            Fragment_gestionAlumnos fragmentGestionAlumnos = new Fragment_gestionAlumnos();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragPerfilEst, fragmentGestionAlumnos)
+                    .commit();
+
 
 
 
@@ -177,6 +183,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
 
     }
+
+
+
+
 
 
         drawerLayout.closeDrawer(GravityCompat.START);

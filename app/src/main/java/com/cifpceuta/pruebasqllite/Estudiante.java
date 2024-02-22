@@ -14,6 +14,20 @@ public class Estudiante {
         this.turno = turno;
     }
 
+    public Estudiante(String nombre, String correo, String grupo) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.grupo = grupo;
+    }
+
+    public Estudiante(String nombre, String correo) {
+        this.nombre = nombre;
+        this.correo = correo;
+
+    }
+
+
+
     public String getNombre() {
         return nombre;
     }
