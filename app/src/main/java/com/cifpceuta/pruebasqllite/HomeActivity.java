@@ -170,6 +170,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
+     else if (itemId == R.id.nav_search) {
+            Fragment_SearchEliminate fragmentSearchEliminate = new Fragment_SearchEliminate();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragPerfilEst, fragmentSearchEliminate)
+                    .commit();
+
+    }
+
+
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
